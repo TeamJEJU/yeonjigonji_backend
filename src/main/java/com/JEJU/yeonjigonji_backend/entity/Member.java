@@ -16,23 +16,23 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @Column(name = "member_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String name; //이름
 
-    private String password;
+    private String password; //비밀번호
 
     @Column(unique = true)
-    private String email;
+    private String email; //이메일(아이디로 사용)
 
     private Integer age;
 
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Gender gender; //성별
 
     @Enumerated(EnumType.STRING)
     private Role role;

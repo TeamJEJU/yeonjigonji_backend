@@ -31,6 +31,7 @@ public class MemberController {
         Member member = Member.createMember(memberFormDto, passwordEncoder);
         memberService.saveMember(member);
 
+
         return "redirect:/";
     }
 }
