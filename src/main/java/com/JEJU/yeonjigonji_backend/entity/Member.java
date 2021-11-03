@@ -1,6 +1,5 @@
 package com.JEJU.yeonjigonji_backend.entity;
 
-
 import com.JEJU.yeonjigonji_backend.constant.Gender;
 import com.JEJU.yeonjigonji_backend.constant.Role;
 import com.JEJU.yeonjigonji_backend.dto.MemberFormDto;
