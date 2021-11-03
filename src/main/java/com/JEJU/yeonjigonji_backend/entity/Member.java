@@ -10,9 +10,11 @@ import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "member")
+@Table(name = "members") //밑에서 1:n 관계 매핑 정렬 기준을 "member"으로 지정했기 때문에 복수형 사용
 @Getter
 @Setter
 @ToString
@@ -36,6 +38,10 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "member") // member:like = 1:n 관계
+    private List<LikeItem> likes = new ArrayList<>();
+
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();

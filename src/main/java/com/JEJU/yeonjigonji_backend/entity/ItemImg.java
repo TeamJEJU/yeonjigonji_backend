@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 
 @Entity
@@ -23,7 +22,7 @@ public class ItemImg extends BaseTimeEntity {
 
     private String repImgYn; //대표 이미지 여부
 
-    @ManyToOne(fetch = FetchType.LAZY) //다대일 방향으로 매핑
+    @ManyToOne //// itemImg:item = n:1 관계
     @JoinColumn(name = "item_id")
     private Item item;
 
