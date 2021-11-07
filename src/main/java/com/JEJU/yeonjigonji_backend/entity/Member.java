@@ -50,7 +50,7 @@ public class Member extends BaseTimeEntity {
         member.setEmail(memberFormDto.getEmail());
         member.setAge(memberFormDto.getAge());
         member.setGender(memberFormDto.getGender());
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
 }
