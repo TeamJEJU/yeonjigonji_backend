@@ -55,14 +55,8 @@ public class MemberControllerTest {
         String email = "test@email.com";
         String password = "1234";
         this.createMember(email, password);
-
-
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-                .apply(springSecurity())
-                .build();
-
         mockMvc.perform(formLogin().userParameter("email")
-                        .loginProcessingUrl("/member/login")
+                        .loginProcessingUrl("/members/login")
                         .user(email).password(password))
                 .andExpect(SecurityMockMvcResultMatchers.authenticated());
     }
