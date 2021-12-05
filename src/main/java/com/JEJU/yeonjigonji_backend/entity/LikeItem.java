@@ -14,11 +14,11 @@ public class LikeItem extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne // like:item = n:1 관계
-    @JoinColumn(name="item_id")
+    @ManyToOne(fetch = FetchType.LAZY) // like:item = n:1 관계
+    @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne // like:member = n:1 관계
+    @ManyToOne(fetch = FetchType.LAZY) // like:member = n:1 관계
     @JoinColumn(name = "member_id")
     private Member member;
 
