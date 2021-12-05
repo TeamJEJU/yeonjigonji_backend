@@ -22,7 +22,7 @@ public class ItemImg extends BaseTimeEntity {
 
     private String repImgYn; //대표 이미지 여부
 
-    @ManyToOne //// itemImg:item = n:1 관계
+    @ManyToOne(fetch = FetchType.LAZY) //// itemImg:item = n:1 관계
     @JoinColumn(name = "item_id")
     private Item item;
 
