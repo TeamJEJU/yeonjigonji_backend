@@ -1,5 +1,6 @@
 package com.JEJU.yeonjigonji_backend.util;
 
+import com.JEJU.yeonjigonji_backend.entity.PrdItem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -13,8 +14,12 @@ public class ApachePOIExcelRead {
     private static final String FILE_NAME = "src/main/resources/file/prd_refined_detail_name.xlsx";
 
     public static void main(String[] args) {
+        readExcel(FILE_NAME);
+    }
+
+    static void readExcel(String fileName) {
         try {
-            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            FileInputStream excelFile = new FileInputStream(new File(fileName));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -23,26 +28,31 @@ public class ApachePOIExcelRead {
             while (iterator.hasNext()) { // 행 하나씩
                 Row currentRow = iterator.next();
                 Iterator<Cell> cellIterator = currentRow.iterator(); // 열 하나씩
+                PrdItem data = new PrdItem();
 
-                while (cellIterator.hasNext()) {
+                for (int i = 0; i < 3; i++) {
                     Cell currentCell = cellIterator.next();
-                    switch (currentCell.getCellTypeEnum()) {
-                        case _NONE:
-                            break;
-                        case NUMERIC:
-                            String value = fmt.formatCellValue(currentCell);
-                            if (!value.trim().isEmpty()) {
-                                System.out.print(value + "\t");
+                    switch (i) {
+                        case 0:
+                            String id = fmt.formatCellValue(currentCell);
+                            if (!id.trim().isEmpty()) {
+                                data.setPrd_id(Long.parseLong(id));
                             }
                             break;
-                        case STRING:
-                            System.out.print(currentCell.getStringCellValue() + "\t");
+                        case 1:
+                            String name = currentCell.getStringCellValue();
+                            if (!name.trim().isEmpty()) {
+                                data.setPrd_unt_nm(name);
+                            }
                             break;
-                        case BLANK:
-                            break;
+                        case 2:
+                            String color = currentCell.getStringCellValue();
+                            if (!color.trim().isEmpty()) {
+                                data.setPrd_color(color);
+                            }
                     }
                 }
-                System.out.print("\n");
+                System.out.print(data + "\n");
             }
 
         } catch (FileNotFoundException e) {
