@@ -1,5 +1,6 @@
 package com.JEJU.yeonjigonji_backend.entity;
 
+import com.JEJU.yeonjigonji_backend.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
