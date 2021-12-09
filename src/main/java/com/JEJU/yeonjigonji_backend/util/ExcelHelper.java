@@ -2,7 +2,6 @@ package com.JEJU.yeonjigonji_backend.util;
 
 import com.JEJU.yeonjigonji_backend.entity.PrdDetailItem;
 import com.JEJU.yeonjigonji_backend.entity.PrdItem;
-import com.JEJU.yeonjigonji_backend.service.PrdItemService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -14,18 +13,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ApachePOIExcelRead {
+public class ExcelHelper {
     private static final String FILE_NAME = "src/main/resources/file/prd_refined_detail_name.xlsx";
     private static final String FILE_DETAIL_NAME = "src/main/resources/file/prd_refined_data_list.xlsx";
 
-    public static void main(String[] args) {
-        readItemExcel(FILE_NAME);
-        readDetailExcel(FILE_DETAIL_NAME);
-    }
+//    public static void main(String[] args) {
+//        readItemExcel(FILE_NAME);
+//        readDetailExcel(FILE_DETAIL_NAME);
+//    }
 
-    static List<PrdItem> readItemExcel(String fileName) {
+    public static List<PrdItem> readItemExcel() {
         try {
-            FileInputStream excelFile = new FileInputStream(new File(fileName));
+            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -78,9 +77,9 @@ public class ApachePOIExcelRead {
         return null;
     }
 
-    static List<PrdDetailItem> readDetailExcel(String fileName) {
+    public static List<PrdDetailItem> readDetailExcel() {
         try {
-            FileInputStream excelFile = new FileInputStream(new File(fileName));
+            FileInputStream excelFile = new FileInputStream(new File(FILE_DETAIL_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -99,8 +98,7 @@ public class ApachePOIExcelRead {
                         case 0:
                             String id = fmt.formatCellValue(currentCell);
                             if (!id.trim().isEmpty()) {
-                                //data.setId(Long.parseLong(id));
-                                //data.setPrdItem();
+                                data.setId(Long.parseLong(id)); // id 동일하게 넣어넣고 db에 넣을 때 reset하게 (prdItem에서 찾기 위해)
                             }
                             break;
                         case 1:
