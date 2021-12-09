@@ -14,15 +14,19 @@ public class LikeItem extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY) // like:item = n:1 관계
+//    @JoinColumn(name = "item_id")
+//    private Item item;
+
     @ManyToOne(fetch = FetchType.LAZY) // like:item = n:1 관계
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @JoinColumn(name = "prd_id")
+    private PrdItem item;
 
     @ManyToOne(fetch = FetchType.LAZY) // like:member = n:1 관계
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public static LikeItem createLike(Item item,Member member) {
+    public static LikeItem createLike(PrdItem item, Member member) {
         LikeItem like = new LikeItem();
         like.setItem(item);
         like.setMember(member);
