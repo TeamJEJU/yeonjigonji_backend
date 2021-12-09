@@ -17,11 +17,13 @@ public class PrdDetailItem extends BaseTimeEntity{
     private String brandNm; // 브랜드명
 
     @Column(name = "sl_pc")
-    private int price; //가격
+    private Integer price; //가격
 
     @OneToOne(mappedBy = "prdDetailItem")
     private PrdItem prdItem;
 
-    @OneToMany(mappedBy = "andItem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PrdDetailAndImg> imgs = new ArrayList<>();
+//    @OneToMany(mappedBy = "andItem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<PrdDetailAndImg> imgs = new ArrayList<>();
+
+    private String repImg; // 대표 이미지
 }

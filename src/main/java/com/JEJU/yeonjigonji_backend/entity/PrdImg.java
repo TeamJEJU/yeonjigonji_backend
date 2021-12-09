@@ -15,12 +15,11 @@ public class PrdImg extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String imgName; //이미지 파일명
-
     private String imgUri; //이미지 조회 경로 uri
 
-    private String repImgYn; //대표 이미지 여부
+    private Boolean repImgYn; //대표 이미지 여부
 
     @OneToMany(mappedBy = "andImg", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrdDetailAndImg> detailItems = new ArrayList<>();
+
 }
