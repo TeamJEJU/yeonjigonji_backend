@@ -26,4 +26,7 @@ public class PrdDetailItem extends BaseTimeEntity{
 //    private List<PrdDetailAndImg> imgs = new ArrayList<>();
 
     private String repImg; // 대표 이미지
+
+    private String imgTags; // 이미지 태그 리스트
+
 }
