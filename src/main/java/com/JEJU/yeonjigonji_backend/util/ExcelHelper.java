@@ -14,17 +14,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelHelper {
-    private static final String FILE_NAME = "src/main/resources/file/prd_refined_detail_name.xlsx";
-    private static final String FILE_DETAIL_NAME = "src/main/resources/file/prd_refined_data_list.xlsx";
+    private static final String FILE_DETAIL_NAME = "src/main/resources/file/prd_refined_detail_name.xlsx";
+    private static final String FILE_NAME = "src/main/resources/file/prd_refined_data_list.xlsx";
 
 //    public static void main(String[] args) {
-//        readItemExcel(FILE_NAME);
-//        readDetailExcel(FILE_DETAIL_NAME);
+//        readItemExcel();
+//        readDetailExcel();
 //    }
 
     public static List<PrdItem> readItemExcel() {
         try {
-            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            FileInputStream excelFile = new FileInputStream(new File(FILE_DETAIL_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -79,7 +79,7 @@ public class ExcelHelper {
 
     public static List<PrdDetailItem> readDetailExcel() {
         try {
-            FileInputStream excelFile = new FileInputStream(new File(FILE_DETAIL_NAME));
+            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -119,15 +119,20 @@ public class ExcelHelper {
                                 //System.out.print(price + "\n");
                                 try {
                                     data.setPrice(Integer.parseUnsignedInt(price));
-                                }catch (NumberFormatException e){
+                                } catch (NumberFormatException e) {
                                     e.printStackTrace();
                                 }
                             }
                             break;
+                        case 4:
+                            String images = fmt.formatCellValue(currentCell);
+                            if (!images.trim().isEmpty()) {
+                                data.setImgTags(images);
+                            }
 
                     }
                     cellIdx++;
-                    if (cellIdx == 4) break;
+                    if (cellIdx == 5) break;
                 }
                 System.out.print(data + "\n");
                 dataList.add(data);
