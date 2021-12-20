@@ -38,7 +38,7 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member") // member:like = 1:n 관계
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL) // member:like = 1:n 관계
     private List<LikeItem> likes = new ArrayList<>();
 
 
