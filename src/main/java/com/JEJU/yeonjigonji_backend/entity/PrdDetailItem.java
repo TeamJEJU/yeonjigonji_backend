@@ -25,8 +25,10 @@ public class PrdDetailItem extends BaseTimeEntity{
 //    @OneToMany(mappedBy = "andItem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<PrdDetailAndImg> imgs = new ArrayList<>();
 
+    @Column(length = 500)
     private String repImg; // 대표 이미지
 
+    @Column(length = 4000)
     private String imgTags; // 이미지 태그 리스트
 
 }
