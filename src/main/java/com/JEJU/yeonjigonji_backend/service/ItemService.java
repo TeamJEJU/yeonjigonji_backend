@@ -23,12 +23,11 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public PrdItemFormDto getItemDtl(Long prdDetailId) {
-        PrdItem prdItem = prdItemRepository.findByPrdDetailItemId(prdDetailId);
-        PrdDetailItem prdDetailItem = prdDetailRepository.findById(prdDetailId)
-                .orElseThrow(EntityNotFoundException::new);
-        PrdItemFormDto prdItemFormDto = new PrdItemFormDto(prdItem,prdDetailItem);
-        return  prdItemFormDto;
+            PrdItem prdItem = prdItemRepository.findByPrdDetailItemId(prdDetailId);
+            PrdDetailItem prdDetailItem = prdDetailRepository.findById(prdDetailId)
+                    .orElseThrow(EntityNotFoundException::new);
+            PrdItemFormDto prdItemFormDto = new PrdItemFormDto(prdItem, prdDetailItem);
+            return prdItemFormDto;
     }
-
 
 }

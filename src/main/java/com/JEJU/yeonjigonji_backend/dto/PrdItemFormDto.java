@@ -35,6 +35,6 @@ public class PrdItemFormDto {
         this.imgTags = prdDetailItemAnother.getImgTags();
     }
 
-   // private static ModelMapper modelMapper = new ModelMapper();
+    // private static ModelMapper modelMapper = new ModelMapper();
 
 }
