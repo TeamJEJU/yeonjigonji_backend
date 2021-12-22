@@ -29,13 +29,12 @@ public class ExcelHelper {
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
             DataFormatter fmt = new DataFormatter();
+            List<PrdItem> dataList = new ArrayList<>();
 
-            List<PrdItem> dataList = null;
             while (iterator.hasNext()) { // 행 하나씩
                 Row currentRow = iterator.next();
                 Iterator<Cell> cellIterator = currentRow.iterator(); // 열 하나씩
                 PrdItem data = new PrdItem();
-                dataList = new ArrayList<>();
 
                 int cellIdx = 0;
                 while (cellIterator.hasNext()) {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -27,11 +28,17 @@ public class ExcelService {
     public void savePrdDetailItem(){
         List<PrdDetailItem> prdDetailList = ExcelHelper.readDetailExcel();
         Long i = 0L;
-        for (PrdDetailItem detail : prdDetailList){
-            PrdItem prdItem = prdItemRepository.findById(detail.getId()).get();
-            detail.setPrdItem(prdItem);
-            detail.setId(i);
-            i++;
+        try {
+            for (PrdDetailItem detail : prdDetailList) {
+                if(detail.getPrdItem() != null) {
+                    PrdItem prdItem = prdItemRepository.findById(detail.getId()).get();
+                    detail.setPrdItem(prdItem);
+                    detail.setId(i);
+                    i++;
+                }
+            }
+        }catch(NoSuchElementException e){
+            e.printStackTrace();
         }
         prdDetailItemRepository.saveAll(prdDetailList);
     }
