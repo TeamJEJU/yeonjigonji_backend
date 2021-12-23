@@ -53,7 +53,7 @@ public class ExcelHelper {
                             }
                             break;
                         case 2:
-                            String color = currentCell.getStringCellValue();
+                            String color = currentCell.toString();
                             if (!color.trim().isEmpty()) {
                                 data.setColor(color);
                             }
@@ -147,6 +147,7 @@ public class ExcelHelper {
         }
         return null;
     }
+
 
 
 }
