@@ -20,30 +20,19 @@ public class ExcelService {
     private final PrdItemRepository prdItemRepository;
     private final PrdDetailItemRepository prdDetailItemRepository;
 
-//    public void savePrdItem(){
-//        List<PrdItem> prdList = ExcelHelper.readItemExcel();
-//        prdItemRepository.saveAll(prdList);
-//    }
     public void savePrdItem(){
         List<PrdItem> prdItemList = ExcelHelper.readItemExcel();
         Long i = 0L;
         try {
             for (PrdItem detail : prdItemList) {
                 if(detail.getId() != null) {
-                    System.out.print(i+"savaPrdItem: ");
-                    System.out.println(detail);
                     if(prdDetailItemRepository.findById(detail.getId()).isPresent()) {
                         PrdDetailItem prdDetailItem = prdDetailItemRepository.findById(detail.getId())
                                     .orElseThrow(IllegalArgumentException::new);
-                        System.out.println(i + "prdDetailItem: " + prdDetailItem);
                         detail.setPrdDetailItem(prdDetailItem);
                     }
-
                     detail.setId(i);
                     i++;
-                    System.out.print(i+"savaPrdItem: ");
-                    System.out.println(detail);
-
                 }
             }
         }catch(NoSuchElementException e){
@@ -57,23 +46,6 @@ public class ExcelService {
         prdDetailItemRepository.saveAll(prdDetailList);
     }
 
-//    public void savePrdDetailItem(){
-//        List<PrdDetailItem> prdDetailList = ExcelHelper.readDetailExcel();
-//        Long i = 0L;
-//        try {
-//            for (PrdDetailItem detail : prdDetailList) {
-//                if(detail.getPrdItem() != null) {
-//                    PrdItem prdItem = prdItemRepository.findById(detail.getId()).get();
-//                    detail.setPrdItem(prdItem);
-//                    detail.setId(i);
-//                    i++;
-//                }
-//            }
-//        }catch(NoSuchElementException e){
-//            e.printStackTrace();
-//        }
-//        prdDetailItemRepository.saveAll(prdDetailList);
-//    }
 
     public List<PrdItem> getAllPrd(){
         return prdItemRepository.findAll();
