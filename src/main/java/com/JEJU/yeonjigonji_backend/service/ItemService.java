@@ -22,8 +22,10 @@ public class ItemService {
     private final PrdItemRepository prdItemRepository;
 
     @Transactional(readOnly = true)
-    public PrdItemFormDto getItemDtl(Long prdDetailId) {
-            PrdItem prdItem = prdItemRepository.findByPrdDetailItemId(prdDetailId);
+    public PrdItemFormDto getItemDtl(Long prdId) {
+            PrdItem prdItem = prdItemRepository.findById(prdId)
+                    .orElseThrow(EntityNotFoundException::new);
+            long prdDetailId = prdItem.getPrdDetailItem().getId();
             PrdDetailItem prdDetailItem = prdDetailRepository.findById(prdDetailId)
                     .orElseThrow(EntityNotFoundException::new);
             PrdItemFormDto prdItemFormDto = new PrdItemFormDto(prdItem, prdDetailItem);

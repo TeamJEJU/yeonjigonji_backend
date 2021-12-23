@@ -8,3 +8,7 @@
 - 데이터베이스 : MySQL
 - 테스트용 데이터베이스 : H2
 - 빌드 툴 : 메이븐
+
+주의 사항
+-localhost/api/excel/prdItem에 접속 후, localhost/api/excel/prdDetailItem에 접속해야 데이터베이스가 정상적으로 저장됩니다.
+(prdItem의 prd_detail_id가 prdDetailItem의 id를 참조하기 때문에)

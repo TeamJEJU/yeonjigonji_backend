@@ -21,18 +21,16 @@ public class ExcelService {
     private final PrdDetailItemRepository prdDetailItemRepository;
 
     public void savePrdItem(){
-        List<PrdItem> prdList = ExcelHelper.readItemExcel();
-        prdItemRepository.saveAll(prdList);
-    }
-
-    public void savePrdDetailItem(){
-        List<PrdDetailItem> prdDetailList = ExcelHelper.readDetailExcel();
+        List<PrdItem> prdItemList = ExcelHelper.readItemExcel();
         Long i = 0L;
         try {
-            for (PrdDetailItem detail : prdDetailList) {
-                if(detail.getPrdItem() != null) {
-                    PrdItem prdItem = prdItemRepository.findById(detail.getId()).get();
-                    detail.setPrdItem(prdItem);
+            for (PrdItem detail : prdItemList) {
+                if(detail.getId() != null) {
+                    if(prdDetailItemRepository.findById(detail.getId()).isPresent()) {
+                        PrdDetailItem prdDetailItem = prdDetailItemRepository.findById(detail.getId())
+                                    .orElseThrow(IllegalArgumentException::new);
+                        detail.setPrdDetailItem(prdDetailItem);
+                    }
                     detail.setId(i);
                     i++;
                 }
@@ -40,8 +38,14 @@ public class ExcelService {
         }catch(NoSuchElementException e){
             e.printStackTrace();
         }
+        prdItemRepository.saveAll(prdItemList);
+    }
+
+    public void savePrdDetailItem(){
+        List<PrdDetailItem> prdDetailList = ExcelHelper.readDetailExcel();
         prdDetailItemRepository.saveAll(prdDetailList);
     }
+
 
     public List<PrdItem> getAllPrd(){
         return prdItemRepository.findAll();
