@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,6 +62,7 @@ public class ExcelHelper {
                     }
                     cellIdx++;
                 }
+                data.setRegTime(LocalDateTime.now());
                 System.out.print(data + "\n");
                 dataList.add(data);
             }
@@ -133,6 +135,7 @@ public class ExcelHelper {
                     cellIdx++;
                     if (cellIdx == 5) break;
                 }
+                data.setRegTime(LocalDateTime.now());
                 System.out.print(data + "\n");
                 dataList.add(data);
             }
@@ -147,7 +150,6 @@ public class ExcelHelper {
         }
         return null;
     }
-
 
 
 }
