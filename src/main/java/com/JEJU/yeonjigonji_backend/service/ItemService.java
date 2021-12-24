@@ -44,4 +44,10 @@ public class ItemService {
         return itemRepository.getSearchItemPage(itemSearchDto,pageable);
     }
 
+    //
+    @Transactional(readOnly = true)
+    public Page<SearchItemDto> getSearchColorSimilarity(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getSearchColorSimilarity(itemSearchDto,pageable);
+    }
+
 }

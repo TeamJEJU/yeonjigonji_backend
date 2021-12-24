@@ -7,14 +7,17 @@ import com.JEJU.yeonjigonji_backend.service.ItemService;
 import com.JEJU.yeonjigonji_backend.dto.PrdItemFormDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.Optional;
 
@@ -32,10 +35,16 @@ public class ItemController {
     }
 
     @GetMapping(value = {"/item/result", "item/result/{page}"})
-    public Object itemSearch(@RequestBody ItemSearchDto itemSearchDto,
-                             @PathVariable("page") Optional<Integer> page){
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);
-        Page<SearchItemDto> items = itemService.getSearchItemPage(itemSearchDto,pageable);
+    public Page<SearchItemDto> itemSearch(@RequestBody ItemSearchDto itemSearchDto,
+                                                         @PathVariable("page") Optional<Integer> page){
+        Page<SearchItemDto> items = Page.empty();
+        if(StringUtils.equals("itemNm",itemSearchDto.getSearchBy())) {
+            Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);
+            items = itemService.getSearchItemPage(itemSearchDto, pageable);
+        }else if(StringUtils.equals("color",itemSearchDto.getSearchBy())) {
+            Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);
+            items = itemService.getSearchColorSimilarity(itemSearchDto, pageable);
+        }
 
         return items;
     }
