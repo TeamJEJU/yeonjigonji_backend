@@ -13,8 +13,8 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String main() {
-        //excelService.savePrdItem();
         //excelService.savePrdDetailItem();
+        excelService.savePrdItem();
         return "main";
     }
 }
