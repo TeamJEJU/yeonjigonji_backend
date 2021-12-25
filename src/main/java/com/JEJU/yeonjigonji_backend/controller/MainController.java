@@ -5,8 +5,9 @@ import com.JEJU.yeonjigonji_backend.service.ExcelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class MainController {
     private final ExcelService excelService;
@@ -15,6 +16,6 @@ public class MainController {
     public String main() {
         //excelService.savePrdItem();
         //excelService.savePrdDetailItem();
-        return "main";
+        return "메인 화면 입니다.";
     }
 }
