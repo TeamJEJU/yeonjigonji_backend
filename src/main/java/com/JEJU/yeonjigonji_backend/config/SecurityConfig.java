@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MemberService memberService;
 
+    //http 요청에 대한 보안을 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -42,8 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
         ;
+
+        http.csrf().ignoringAntMatchers("/members/**");
     }
 
+    //해시 함수를 이용하여 비밀번호를 암호화하여 저장
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // 비밀번호 암호화
@@ -58,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
+
     }
 
 }
