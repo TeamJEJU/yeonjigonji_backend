@@ -101,16 +101,13 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
         for(int i=0; i<count; i++ ){
             double similarity = 0;
             String color = results.getResults().get(i).getColor();
-            System.out.println(i+"번째 color: "+color);
             if(results.getResults().get(i).getColor()!=null) {
                 double RR = Math.abs(RED-Integer.parseInt(color.substring(0,2),16));
                 double GG = Math.abs(GRN-Integer.parseInt(color.substring(2,4),16));
                 double BB = Math.abs(BLU-Integer.parseInt(color.substring(4,6),16));
                 similarity = (1-((RR+GG+BB)/(255*3)))*100;
-                System.out.println(i+"번째 RR+GG+BB: "+(double)(RR+GG+BB)/765);
             }
             results.getResults().get(i).setSimilarity((int)similarity);
-            System.out.println(i+"번째 similarity: "+results.getResults().get(i).getSimilarity());
         }
 
         List<SearchItemDto> content = results.getResults().stream()
