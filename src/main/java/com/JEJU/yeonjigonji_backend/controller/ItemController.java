@@ -28,7 +28,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping(value = "/item/result/{itemId}")
+    @GetMapping(value = "/item/{itemId}")
     public PrdItemFormDto itemDtl(@PathVariable("itemId") Long itemId) {
         PrdItemFormDto prdItemFormDto = itemService.getItemDtl(itemId);
         return prdItemFormDto;
