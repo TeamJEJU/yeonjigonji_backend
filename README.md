@@ -16,7 +16,7 @@
 
 ### Packaging
 ```text
-✈com.JEJU.yeonjigonji_backend
+🎈com.JEJU.yeonjigonji_backend
  ┣ 📂config
  ┣ 📂constant       
  ┣ 📂controller
