@@ -12,3 +12,30 @@
 주의 사항
 -localhost/api/excel/prdItem에 접속 후, localhost/api/excel/prdDetailItem에 접속해야 데이터베이스가 정상적으로 저장됩니다.
 (prdItem의 prd_detail_id가 prdDetailItem의 id를 참조하기 때문에)
+
+
+### Packaging
+```text
+✈com.JEJU.yeonjigonji_backend
+ ┣ 📂config
+ ┣ 📂constant       
+ ┣ 📂controller
+ ┃ ┣ 📃ExcelController
+ ┃ ┣ 📃ItemController
+ ┃ ┣ 📃MainController
+ ┃ ┗ 📃MemberController
+ ┣ 📂dto
+ ┣ 📂entity       
+ ┃ ┣ 📃BaseTimeEntity
+ ┃ ┣ 📃LikeItem
+ ┃ ┣ 📃Member
+ ┃ ┣ 📃Message
+ ┃ ┣ 📃PrdDetailItem
+ ┃ ┗ 📃PrdItem
+ ┣ 📂repository
+ ┣ 📂service          
+ ┃ ┣ 📃ExcelService
+ ┃ ┣ 📃ItemService
+ ┃ ┗ 📃MemberService
+ ┗📂util  
+```
