@@ -17,11 +17,6 @@ public class ExcelHelper {
     private static final String FILE_DETAIL_NAME = "src/main/resources/file/prd_refined_detail_name.xlsx";
     private static final String FILE_NAME = "src/main/resources/file/prd_refined_data_list.xlsx";
 
-//    public static void main(String[] args) {
-//        readItemExcel();
-//        readDetailExcel();
-//    }
-
     public static List<PrdItem> readItemExcel() {
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_DETAIL_NAME));
