@@ -31,7 +31,7 @@ public class ItemController {
         return prdItemFormDto;
     }
 
-    @PostMapping(value = {"/item/result", "item/result/{page}"})
+    @GetMapping(value = {"/item/result", "item/result/{page}"})
     public Page<SearchItemDto> itemSearch(@RequestBody ItemSearchDto itemSearchDto,
                                                          @PathVariable("page") Optional<Integer> page){
         Page<SearchItemDto> items = Page.empty();
